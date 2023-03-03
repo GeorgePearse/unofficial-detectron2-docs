@@ -8,11 +8,5 @@ clean_datetime = str(datetime.now()).replace(' ','_').replace(':','-')
 cfg.OUTPUT_DIR = f'output/{clean_datetime}'
 ```
 
-```py
-clean_datetime = str(datetime.now()).replace(' ','_').replace(':','-')
-cfg.OUTPUT_DIR = f'output/{clean_datetime}'
-```
-
-
 Limitations of Tensorboard: 
 * Can't add notes to runs without further plugins.

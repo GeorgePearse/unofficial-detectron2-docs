@@ -9,17 +9,17 @@
       
       
       
-        <link rel="prev" href="../../distributed-training/distributed-training/">
+        <link rel="prev" href="../../training/training/">
       
       
-        <link rel="next" href="../advanced/">
+        <link rel="next" href="../../checkpointing/checkpointing/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.0">
     
     
       
-        <title>Simple - My Docs</title>
+        <title>Datasets - My Docs</title>
       
     
     
@@ -66,6 +66,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#simplest-setup" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -97,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Simple
+              Datasets
             
           </span>
         </div>
@@ -248,11 +253,21 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../datasets/datasets/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Datasets
       </a>
+      
     </li>
   
 
@@ -290,16 +305,14 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5" >
       
       
       
@@ -308,7 +321,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_5_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_5_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_1_5">
           <span class="md-nav__icon md-icon"></span>
           Augmentations
@@ -319,19 +332,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../augmentations/simple/" class="md-nav__link">
         Simple
       </a>
-      
     </li>
   
 
@@ -343,7 +348,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../advanced/" class="md-nav__link">
+      <a href="../../augmentations/advanced/" class="md-nav__link">
         Advanced
       </a>
     </li>
@@ -575,6 +580,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -592,9 +599,25 @@
   
 
 
-  <h1>Simple</h1>
+<h1 id="simplest-setup">Simplest Setup</h1>
+<div class="highlight"><pre><span></span><code><span class="n">register_coco_instances</span><span class="p">(</span>
+    <span class="s2">&quot;train&quot;</span><span class="p">,</span> 
+    <span class="p">{},</span> 
+    <span class="n">cfg</span><span class="o">.</span><span class="n">training_annotations</span><span class="p">,</span> 
+    <span class="s2">&quot;&lt;path-to-training-dataset&gt;&quot;</span>
+<span class="p">)</span>
 
-
+<span class="n">register_coco_instances</span><span class="p">(</span>
+    <span class="s2">&quot;val&quot;</span><span class="p">,</span> 
+    <span class="p">{},</span> 
+    <span class="n">cfg</span><span class="o">.</span><span class="n">validation_annotations</span><span class="p">,</span> 
+    <span class="s2">&quot;&lt;path-to-val-dataset&gt;&quot;</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Register the datasets you'll use, and then specify them in the config.</p>
+<div class="highlight"><pre><span></span><code><span class="n">cfg</span><span class="o">.</span><span class="n">DATASETS</span><span class="o">.</span><span class="n">TRAIN</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;train&quot;</span><span class="p">,)</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">DATASETS</span><span class="o">.</span><span class="n">TEST</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;val&quot;</span><span class="p">,)</span>
+</code></pre></div>
 
 
 

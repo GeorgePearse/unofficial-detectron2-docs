@@ -4,7 +4,14 @@ theme:
 
 nav:     
   - Tutorials:
-    - 'Deployment':
+    - Training: 'training/training.md'
+    - Datasets: 'datasets/datasets.md'
+    - Checkpointing: 'checkpointing/checkpointing.md'
+    - 'Distributed Training': 'distributed-training/distributed-training.md'
+    - Augmentations:
+      - Simple: 'augmentations/simple.md'
+      - Advanced: 'augmentations/advanced.md'
+    - Deployment:
       - Intro: 'deployment/intro.md'
       - ONNX: 'deployment/onnx.md'
       - Torchscript: 'deployment/torchscript.md'
@@ -13,13 +20,9 @@ nav:
       - Aim: 'experiment-tracking/aim.md'
       - MLFlow: 'experiment-tracking/mlflow.md'
     - 'Configurable Parameters': 'config/intro.md'
-    - 'Benchmarks': 'benchmarks/benchmarks.md'
+    - Benchmarks: 'benchmarks/benchmarks.md'
     - 'Advanced Projects': 'advanced-projects/projects.md'
-    - 'Checkpointing': 'checkpointing/checkpointing.md'
-    - Augmentations:
-      - Simple: 'augmentations/simple.md'
-      - Advanced: 'augmentations/advanced.md'
-    - 'Distributed Training': 'distributed-training/distributed-training.md'
+    
 
 plugins:
   - search:

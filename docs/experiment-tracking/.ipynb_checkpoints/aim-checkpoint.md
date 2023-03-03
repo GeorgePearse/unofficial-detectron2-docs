@@ -8,7 +8,7 @@ The one caveat is that their implementation did not support multi-gpu training.
 That required a step to use 'comm' in order to check whether the process in which the code was being run was the 'main' process. Without this check an experiment was tracked 
 for every GPU being used to run training e.g. you run python train.py and get an experiment for each GPU.
 
-```
+```python
 from detectron2.engine import HookBase
 from aim import Run
 import torch
@@ -63,7 +63,7 @@ class AimHook(HookBase):
 
 You then need to register your hook to the trainer, this looks something like 
 
-```
+```python
 aim_hook = AimHook(cfg)
 trainer = DefaultTrainer()
 trainer.register_hooks(hooks=[aim_hook])

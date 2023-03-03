@@ -63,7 +63,7 @@ class AimHook(HookBase):
 
 You then need to register your hook to the trainer, this looks something like 
 
-```
+```python
 aim_hook = AimHook(cfg)
 trainer = DefaultTrainer()
 trainer.register_hooks(hooks=[aim_hook])
