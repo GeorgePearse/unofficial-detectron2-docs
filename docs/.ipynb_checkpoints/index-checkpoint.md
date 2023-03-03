@@ -1,17 +1,10 @@
-# Welcome to MkDocs
+## Motivation
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+The detectron2 API is incredible, but the documentation and response to GitHub issues are incredibly bad. 
 
-## Commands
+This is very wasteful, and felt like an easy thing to start fixing. 
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
 
-## Project layout
+## About Me 
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+2 years in Medical Imaging startup, now working in AI for Waste Management / Recycling. 

@@ -2,10 +2,11 @@ site_name: My Docs
 theme:
   name: material
 
-nav:
+nav:     
   - Tutorials:
     - 'Deployment':
       - intro: 'deployment/intro.md'
       - onnx: 'deployment/onnx.md'
       - torchscript: 'deployment/torchscript.md'
+  
 
