@@ -12,10 +12,11 @@ nav:
       - Tensorboard: 'experiment-tracking/tensorboard.md'
       - Aim: 'experiment-tracking/aim.md'
       - MLFlow: 'experiment-tracking/mlflow.md'
-    - 'Configurable Parameters': 
-      - Intro: 'config/intro.md'
+    - 'Configurable Parameters': 'config/intro.md'
     - 'Benchmarks': 'benchmarks/benchmarks.md'
     - 'Advanced Projects': 'advanced-projects/projects.md'
+    - 'Checkpointing': 'checkpointing/checkpointing.md'
+    
 
 plugins:
   - search:
