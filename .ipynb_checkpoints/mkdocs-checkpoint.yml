@@ -16,7 +16,9 @@ nav:
     - 'Benchmarks': 'benchmarks/benchmarks.md'
     - 'Advanced Projects': 'advanced-projects/projects.md'
     - 'Checkpointing': 'checkpointing/checkpointing.md'
-    
+    - Augmentations:
+      - Simple: 'augmentations/simple.md'
+      - Advanced: 'augmentations/simple.md'
 
 plugins:
   - search:
