@@ -5,9 +5,13 @@ theme:
 nav:     
   - Tutorials:
     - 'Deployment':
-      - intro: 'deployment/intro.md'
-      - onnx: 'deployment/onnx.md'
-      - torchscript: 'deployment/torchscript.md'
+      - Intro: 'deployment/intro.md'
+      - ONNX: 'deployment/onnx.md'
+      - Torchscript: 'deployment/torchscript.md'
+    - 'Experiment Tracking': 
+      - Tensorboard: 'experiment-tracking/torchscript.md'
+      - Aim: 'experiment-tracking/aim.md'
+      - MLFlow: 'experiment-tracking/mlflow.md'
 
 plugins:
   - search:
