@@ -9,7 +9,7 @@ nav:
       - ONNX: 'deployment/onnx.md'
       - Torchscript: 'deployment/torchscript.md'
     - 'Experiment Tracking': 
-      - Tensorboard: 'experiment-tracking/torchscript.md'
+      - Tensorboard: 'experiment-tracking/tensorboard.md'
       - Aim: 'experiment-tracking/aim.md'
       - MLFlow: 'experiment-tracking/mlflow.md'
 

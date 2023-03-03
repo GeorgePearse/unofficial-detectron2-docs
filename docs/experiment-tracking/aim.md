@@ -1,5 +1,13 @@
 ## Experiment Tracking with Aim
 
+This was more or less a copy paste of the tracker written for MLFlow available here. 
+
+https://philenius.github.io/machine%20learning/2022/01/09/how-to-log-artifacts-metrics-and-parameters-of-your-detectron2-model-training-to-mlflow.html
+
+The one caveat is that their implementation did not support multi-gpu training.
+That required a step to use 'comm' in order to check whether the process in which the code was being run was the 'main' process. Without this check an experiment was tracked 
+for every GPU being used to run training e.g. you run python train.py and get an experiment for each GPU.
+
 ```
 from detectron2.engine import HookBase
 from aim import Run

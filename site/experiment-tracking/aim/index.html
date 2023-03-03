@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../../deployment/torchscript/">
+        <link rel="prev" href="../tensorboard/">
       
       
         <link rel="next" href="../mlflow/">
@@ -322,7 +322,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../torchscript.md" class="md-nav__link">
+      <a href="../tensorboard/" class="md-nav__link">
         Tensorboard
       </a>
     </li>
@@ -457,6 +457,11 @@
   <h1>Aim</h1>
 
 <h2 id="experiment-tracking-with-aim">Experiment Tracking with Aim</h2>
+<p>This was more or less a copy paste of the tracker written for MLFlow available here. </p>
+<p>https://philenius.github.io/machine%20learning/2022/01/09/how-to-log-artifacts-metrics-and-parameters-of-your-detectron2-model-training-to-mlflow.html</p>
+<p>The one caveat is that their implementation did not support multi-gpu training.
+That required a step to use 'comm' in order to check whether the process in which the code was being run was the 'main' process. Without this check an experiment was tracked 
+for every GPU being used to run training e.g. you run python train.py and get an experiment for each GPU.</p>
 <pre><code>from detectron2.engine import HookBase
 from aim import Run
 import torch

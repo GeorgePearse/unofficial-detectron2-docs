@@ -11,6 +11,6 @@ Between a lot of different GitHub issues and Stack discussions, a lot of the pro
 
 ## About Me 
 
-2 years in Medical Imaging startup, now working in AI for Waste Management / Recycling. 
+2 years in Medical Imaging startup, now working in AI for Waste Management / Recycling. I work at Binit AI as their Founding MLE. All of my team are excellent, and I enjoy every day I get to work with them. 
 
 Tutorials have been written with a lot of help from Jack Tattershall (https://www.linkedin.com/in/jack-tattershall-9bb972190). A very old friend who meandered his way to Computer Vision alongside me.
