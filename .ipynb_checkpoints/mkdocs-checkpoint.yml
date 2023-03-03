@@ -18,7 +18,8 @@ nav:
     - 'Checkpointing': 'checkpointing/checkpointing.md'
     - Augmentations:
       - Simple: 'augmentations/simple.md'
-      - Advanced: 'augmentations/simple.md'
+      - Advanced: 'augmentations/advanced.md'
+    - 'Distributed Training': 'distributed-training/distributed-training.md'
 
 plugins:
   - search:
