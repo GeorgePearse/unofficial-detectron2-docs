@@ -14,6 +14,8 @@ nav:
       - MLFlow: 'experiment-tracking/mlflow.md'
     - 'Configurable Parameters': 
       - Intro: 'config/intro.md'
+    - 'Benchmarks': 'benchmarks/benchmarks.md'
+    - 'Advanced Projects': 'advanced-projects/projects.md'
 
 plugins:
   - search:
