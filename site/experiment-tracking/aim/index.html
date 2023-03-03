@@ -556,9 +556,15 @@ class AimHook(HookBase):
                     self.run.track(name=k, value=v[0], step=self.trainer.storage.iter)
 
     def after_train(self):
-        with torch.no_grad():
-            with open(os.path.join(self.cfg.OUTPUT_DIR, &quot;model-config.yaml&quot;), &quot;w&quot;) as f:
-                f.write(self.cfg.dump())
+        if comm.is_main_process():
+            with torch.no_grad():
+                with open(os.path.join(self.cfg.OUTPUT_DIR, &quot;model-config.yaml&quot;), &quot;w&quot;) as f:
+                    f.write(self.cfg.dump())
+</code></pre>
+<p>You then need to register your hook to the trainer, this looks something like </p>
+<pre><code>aim_hook = AimHook(cfg)
+trainer = DefaultTrainer()
+trainer.register_hooks(hooks=[aim_hook])
 </code></pre>
 
 

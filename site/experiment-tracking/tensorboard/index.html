@@ -507,6 +507,11 @@
 <h2 id="experiment-tracking-with-tensorboard">Experiment Tracking with Tensorboard</h2>
 <p>This comes out of the box when you train with Detectron2. I'd recommend setting the OUTPUT_DIR on the config, so that 
 each run goes into its own directory, greatly simplifying run comparisons.</p>
+<pre><code>clean_datetime = str(datetime.now()).replace(' ','_').replace(':','-')
+cfg.OUTPUT_DIR = f'output/{clean_datetime}'
+</code></pre>
+<p>Limitations of Tensorboard: 
+* Can't add notes to runs without further plugins.</p>
 
 
 

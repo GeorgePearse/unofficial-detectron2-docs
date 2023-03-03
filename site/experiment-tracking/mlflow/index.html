@@ -66,6 +66,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#experiment-tracking-with-mlflow" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -352,9 +357,38 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          MLFlow
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         MLFlow
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#experiment-tracking-with-mlflow" class="md-nav__link">
+    Experiment Tracking with MLFlow
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -440,6 +474,21 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#experiment-tracking-with-mlflow" class="md-nav__link">
+    Experiment Tracking with MLFlow
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -455,7 +504,101 @@
 
   <h1>MLFlow</h1>
 
+<h2 id="experiment-tracking-with-mlflow">Experiment Tracking with MLFlow</h2>
+<pre><code>from detectron2.engine import HookBase
+from aim import Run
+import torch
+import os
+import detectron2.utils.comm as comm
+from datetime import datetime
 
+MLFLow_URL = os.environ[&quot;MLFlow_URL&quot;]
+
+class MLFlowHook(HookBase):
+    &quot;&quot;&quot;
+    A custom hook class that logs artifacts, metrics, and parameters to MLflow.
+
+    All taken from https://philenius.github.io/machine%20learning/2022/01/09/how-to-log-artifacts-metrics-and-parameters-of-your-detectron2-model-training-to-mlflow.html
+    And adapted for Aim
+
+    Looking at write_metrics in this file can help with further development.
+    https://github.com/facebookresearch/detectron2/blob/80e2673da161f57afe37ef769836a61976108ef1/detectron2/engine/train_loop.py#LL346
+    &quot;&quot;&quot;
+
+    def __init__(self, cfg):
+        super().__init__()
+        self.cfg = cfg.clone()
+
+    def before_train(self):
+
+        clean_datetime = str(datetime.now()).replace(' ','_').replace(':','-')
+
+        # Have to check if it's the main process so that you dont 
+        # get multiple tracked run for a single, multi-gpu process.s
+        if comm.is_main_process():
+            self.run = Run(
+                repo=AIM_URL,
+                experiment=clean_datetime,
+            )
+            self.run['hparams'] = self.cfg
+
+    def after_step(self):
+        # Only write metrics if it's the main process
+        if comm.is_main_process():
+            with torch.no_grad():
+                latest_metrics = self.trainer.storage.latest()
+                for k, v in latest_metrics.items():
+                    self.run.track(name=k, value=v[0], step=self.trainer.storage.iter)
+
+    def after_train(self):
+        with torch.no_grad():
+            with open(os.path.join(self.cfg.OUTPUT_DIR, &quot;model-config.yaml&quot;), &quot;w&quot;) as f:
+                f.write(self.cfg.dump())
+</code></pre>
+<pre><code>from detectron2.engine import HookBase
+import detectron2.utils.comm as comm
+import mlflow
+
+
+class MLflowHook(HookBase):
+    &quot;&quot;&quot;
+    A custom hook class that logs artifacts, metrics, and parameters to MLflow.
+    &quot;&quot;&quot;
+
+    def __init__(self, cfg):
+        super().__init__()
+        self.cfg = cfg.clone()
+
+    def before_train(self):
+        if comm.is_main_process():
+            with torch.no_grad():
+                mlflow.set_tracking_uri(self.cfg.MLFLOW.TRACKING_URI)
+                mlflow.set_experiment(self.cfg.MLFLOW.EXPERIMENT_NAME)
+                mlflow.start_run(run_name=self.cfg.MLFLOW.RUN_NAME)
+                mlflow.set_tag(&quot;mlflow.note.content&quot;,
+                               self.cfg.MLFLOW.RUN_DESCRIPTION)
+                for k, v in self.cfg.items():
+                    mlflow.log_param(k, v)
+
+    def after_step(self):
+        if comm.is_main_process():
+            with torch.no_grad():
+                latest_metrics = self.trainer.storage.latest()
+                for k, v in latest_metrics.items():
+                    mlflow.log_metric(key=k, value=v[0], step=v[1])
+
+    def after_train(self):
+        if comm.is_main_process():
+            with torch.no_grad():
+                with open(os.path.join(self.cfg.OUTPUT_DIR, &quot;model-config.yaml&quot;), &quot;w&quot;) as f:
+                    f.write(self.cfg.dump())
+                mlflow.log_artifacts(self.cfg.OUTPUT_DIR)
+</code></pre>
+<p>You then need to register the hook with your trainer</p>
+<pre><code>mlflow_hook = MLFlowHook(cfg)
+trainer = DefaultTrainer()
+trainer.register_hooks(hooks=[mlflow_hook])
+</code></pre>
 
 
 
