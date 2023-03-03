@@ -12,6 +12,8 @@ nav:
       - Tensorboard: 'experiment-tracking/tensorboard.md'
       - Aim: 'experiment-tracking/aim.md'
       - MLFlow: 'experiment-tracking/mlflow.md'
+    - 'Configurable Parameters': 
+      - Intro: 'config/intro.md'
 
 plugins:
   - search:

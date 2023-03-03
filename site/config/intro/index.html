@@ -9,17 +9,15 @@
       
       
       
-        <link rel="prev" href="../../deployment/torchscript/">
+        <link rel="prev" href="../../experiment-tracking/mlflow/">
       
-      
-        <link rel="next" href="../aim/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.0">
     
     
       
-        <title>Tensorboard - My Docs</title>
+        <title>Intro - My Docs</title>
       
     
     
@@ -67,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#experiment-tracking-with-tensorboard" class="md-skip">
+        <a href="#configurable-parameters-in-detectron2" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Tensorboard
+              Intro
             
           </span>
         </div>
@@ -291,16 +289,14 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
       
       
       
@@ -309,7 +305,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_1_2">
           <span class="md-nav__icon md-icon"></span>
           Experiment Tracking
@@ -320,48 +316,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Tensorboard
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../experiment-tracking/tensorboard/" class="md-nav__link">
         Tensorboard
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#experiment-tracking-with-tensorboard" class="md-nav__link">
-    Experiment Tracking with Tensorboard
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -373,7 +332,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../aim/" class="md-nav__link">
+      <a href="../../experiment-tracking/aim/" class="md-nav__link">
         Aim
       </a>
     </li>
@@ -387,7 +346,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mlflow/" class="md-nav__link">
+      <a href="../../experiment-tracking/mlflow/" class="md-nav__link">
         MLFlow
       </a>
     </li>
@@ -406,14 +365,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" checked>
       
       
       
@@ -422,7 +383,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_1_3">
           <span class="md-nav__icon md-icon"></span>
           Configurable Parameters
@@ -433,11 +394,48 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../config/intro/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Intro
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Intro
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configurable-parameters-in-detectron2" class="md-nav__link">
+    Configurable Parameters in Detectron2
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -481,8 +479,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#experiment-tracking-with-tensorboard" class="md-nav__link">
-    Experiment Tracking with Tensorboard
+  <a href="#configurable-parameters-in-detectron2" class="md-nav__link">
+    Configurable Parameters in Detectron2
   </a>
   
 </li>
@@ -502,11 +500,17 @@
                   
 
 
-  <h1>Tensorboard</h1>
+  <h1>Intro</h1>
 
-<h2 id="experiment-tracking-with-tensorboard">Experiment Tracking with Tensorboard</h2>
-<p>This comes out of the box when you train with Detectron2. I'd recommend setting the OUTPUT_DIR on the config, so that 
-each run goes into its own directory, greatly simplifying run comparisons.</p>
+<h2 id="configurable-parameters-in-detectron2">Configurable Parameters in Detectron2</h2>
+<p>Detectron2 is a config heavy API, really, this is one of its main strength. Train a diverse set of models without needing to edit any actual Python code.</p>
+<p>That said there's an overwhelming number of options, it's hard to find out what many of them do, and it's often difficult to find what you're looking for.</p>
+<pre><code>cfg.MODEL.BACKBONE.FREEZE_AT = 2
+</code></pre>
+<p>How much of your model you want to be frozen.</p>
+<pre><code>cfg.MODEL.BACKBONE.FREEZE_AT = 0 
+</code></pre>
+<p>Would unfreeze your whole model. </p>
 
 
 
