@@ -6,6 +6,20 @@ It is overly verbose, so I've rewritten the core parts below with typer instead 
 It also just runs from a config.yaml (can obviously change the path to the weights here), but for my workflows that would normally point to the original weights that I started training from. Not my best checkpoint.
 So I added an additional argument to point to those trained weights.
 
+```
+import typer 
+
+def main(
+        export_format: str = 'torchscript',
+        architecture_name: str = 'R101',
+        checkpoint_path: str = None,
+    ): 
+    DetectionCheckpointer()
+
+if __name__ == '__main__':
+    typer.run(main)
+```
+
 
 # Deployment
 
@@ -22,3 +36,4 @@ So I added an additional argument to point to those trained weights.
 ## Preprocessing 
 Within detectron2 preprocessing is managed by a predictor object, but if you're using torchscript or ONNX, you're trying to remove your 
 dependence on detectron2. In order to achieve this aim I simply extracted the preprocessing code from the predictor object.
+
