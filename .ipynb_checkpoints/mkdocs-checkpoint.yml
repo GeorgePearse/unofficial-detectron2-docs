@@ -8,5 +8,7 @@ nav:
       - intro: 'deployment/intro.md'
       - onnx: 'deployment/onnx.md'
       - torchscript: 'deployment/torchscript.md'
-  
 
+plugins:
+  - search:
+      lang: en
