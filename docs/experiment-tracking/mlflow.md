@@ -1,7 +1,7 @@
 ## Experiment Tracking with MLFlow
 
 
-```
+```python
 from detectron2.engine import HookBase
 from aim import Run
 import torch

@@ -670,18 +670,18 @@
 <p>It is overly verbose, so I've rewritten the core parts below with typer instead of python's default parser. 
 It also just runs from a config.yaml (can obviously change the path to the weights here), but for my workflows that would normally point to the original weights that I started training from. Not my best checkpoint.
 So I added an additional argument to point to those trained weights.</p>
-<pre><code>import typer 
+<div class="highlight"><pre><span></span><code>import typer 
 
 def main(
-        export_format: str = 'torchscript',
-        architecture_name: str = 'R101',
+        export_format: str = &#39;torchscript&#39;,
+        architecture_name: str = &#39;R101&#39;,
         checkpoint_path: str = None,
     ): 
     DetectionCheckpointer()
 
-if __name__ == '__main__':
+if __name__ == &#39;__main__&#39;:
     typer.run(main)
-</code></pre>
+</code></pre></div>
 <h1 id="deployment">Deployment</h1>
 <h2 id="options">Options</h2>
 <ul>

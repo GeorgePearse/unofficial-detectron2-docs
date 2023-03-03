@@ -25,5 +25,9 @@ plugins:
   - search:
       lang: en
       
+markdown_extensions:
+  - pymdownx.details
+  - pymdownx.superfences
+      
       
 repo_url: https://github.com/GeorgePearse/unofficial-detectron2-docs

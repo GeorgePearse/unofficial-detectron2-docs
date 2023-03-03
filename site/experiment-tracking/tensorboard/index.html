@@ -618,9 +618,12 @@
 <h2 id="experiment-tracking-with-tensorboard">Experiment Tracking with Tensorboard</h2>
 <p>This comes out of the box when you train with Detectron2. I'd recommend setting the OUTPUT_DIR on the config, so that 
 each run goes into its own directory, greatly simplifying run comparisons.</p>
-<pre><code>clean_datetime = str(datetime.now()).replace(' ','_').replace(':','-')
-cfg.OUTPUT_DIR = f'output/{clean_datetime}'
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">clean_datetime</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;output/</span><span class="si">{</span><span class="n">clean_datetime</span><span class="si">}</span><span class="s1">&#39;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">clean_datetime</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;output/</span><span class="si">{</span><span class="n">clean_datetime</span><span class="si">}</span><span class="s1">&#39;</span>
+</code></pre></div>
 <p>Limitations of Tensorboard: 
 * Can't add notes to runs without further plugins.</p>
 

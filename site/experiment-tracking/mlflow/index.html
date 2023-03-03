@@ -616,57 +616,57 @@
   <h1>MLFlow</h1>
 
 <h2 id="experiment-tracking-with-mlflow">Experiment Tracking with MLFlow</h2>
-<pre><code>from detectron2.engine import HookBase
-from aim import Run
-import torch
-import os
-import detectron2.utils.comm as comm
-from datetime import datetime
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">detectron2.engine</span> <span class="kn">import</span> <span class="n">HookBase</span>
+<span class="kn">from</span> <span class="nn">aim</span> <span class="kn">import</span> <span class="n">Run</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">detectron2.utils.comm</span> <span class="k">as</span> <span class="nn">comm</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
-MLFLow_URL = os.environ[&quot;MLFlow_URL&quot;]
+<span class="n">MLFLow_URL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;MLFlow_URL&quot;</span><span class="p">]</span>
 
-class MLFlowHook(HookBase):
-    &quot;&quot;&quot;
-    A custom hook class that logs artifacts, metrics, and parameters to MLflow.
+<span class="k">class</span> <span class="nc">MLFlowHook</span><span class="p">(</span><span class="n">HookBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A custom hook class that logs artifacts, metrics, and parameters to MLflow.</span>
 
-    All taken from https://philenius.github.io/machine%20learning/2022/01/09/how-to-log-artifacts-metrics-and-parameters-of-your-detectron2-model-training-to-mlflow.html
-    And adapted for Aim
+<span class="sd">    All taken from https://philenius.github.io/machine%20learning/2022/01/09/how-to-log-artifacts-metrics-and-parameters-of-your-detectron2-model-training-to-mlflow.html</span>
+<span class="sd">    And adapted for Aim</span>
 
-    Looking at write_metrics in this file can help with further development.
-    https://github.com/facebookresearch/detectron2/blob/80e2673da161f57afe37ef769836a61976108ef1/detectron2/engine/train_loop.py#LL346
-    &quot;&quot;&quot;
+<span class="sd">    Looking at write_metrics in this file can help with further development.</span>
+<span class="sd">    https://github.com/facebookresearch/detectron2/blob/80e2673da161f57afe37ef769836a61976108ef1/detectron2/engine/train_loop.py#LL346</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    def __init__(self, cfg):
-        super().__init__()
-        self.cfg = cfg.clone()
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cfg</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
 
-    def before_train(self):
+    <span class="k">def</span> <span class="nf">before_train</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-        clean_datetime = str(datetime.now()).replace(' ','_').replace(':','-')
+        <span class="n">clean_datetime</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
 
-        # Have to check if it's the main process so that you dont 
-        # get multiple tracked run for a single, multi-gpu process.s
-        if comm.is_main_process():
-            self.run = Run(
-                repo=AIM_URL,
-                experiment=clean_datetime,
-            )
-            self.run['hparams'] = self.cfg
+        <span class="c1"># Have to check if it&#39;s the main process so that you dont </span>
+        <span class="c1"># get multiple tracked run for a single, multi-gpu process.s</span>
+        <span class="k">if</span> <span class="n">comm</span><span class="o">.</span><span class="n">is_main_process</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">run</span> <span class="o">=</span> <span class="n">Run</span><span class="p">(</span>
+                <span class="n">repo</span><span class="o">=</span><span class="n">AIM_URL</span><span class="p">,</span>
+                <span class="n">experiment</span><span class="o">=</span><span class="n">clean_datetime</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">[</span><span class="s1">&#39;hparams&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span>
 
-    def after_step(self):
-        # Only write metrics if it's the main process
-        if comm.is_main_process():
-            with torch.no_grad():
-                latest_metrics = self.trainer.storage.latest()
-                for k, v in latest_metrics.items():
-                    self.run.track(name=k, value=v[0], step=self.trainer.storage.iter)
+    <span class="k">def</span> <span class="nf">after_step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Only write metrics if it&#39;s the main process</span>
+        <span class="k">if</span> <span class="n">comm</span><span class="o">.</span><span class="n">is_main_process</span><span class="p">():</span>
+            <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+                <span class="n">latest_metrics</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">latest</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">latest_metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">track</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">step</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">iter</span><span class="p">)</span>
 
-    def after_train(self):
-        with torch.no_grad():
-            with open(os.path.join(self.cfg.OUTPUT_DIR, &quot;model-config.yaml&quot;), &quot;w&quot;) as f:
-                f.write(self.cfg.dump())
-</code></pre>
-<pre><code>from detectron2.engine import HookBase
+    <span class="k">def</span> <span class="nf">after_train</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">OUTPUT_DIR</span><span class="p">,</span> <span class="s2">&quot;model-config.yaml&quot;</span><span class="p">),</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="o">.</span><span class="n">dump</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>from detectron2.engine import HookBase
 import detectron2.utils.comm as comm
 import mlflow
 
@@ -704,12 +704,12 @@ class MLflowHook(HookBase):
                 with open(os.path.join(self.cfg.OUTPUT_DIR, &quot;model-config.yaml&quot;), &quot;w&quot;) as f:
                     f.write(self.cfg.dump())
                 mlflow.log_artifacts(self.cfg.OUTPUT_DIR)
-</code></pre>
+</code></pre></div>
 <p>You then need to register the hook with your trainer</p>
-<pre><code>mlflow_hook = MLFlowHook(cfg)
+<div class="highlight"><pre><span></span><code>mlflow_hook = MLFlowHook(cfg)
 trainer = DefaultTrainer()
 trainer.register_hooks(hooks=[mlflow_hook])
-</code></pre>
+</code></pre></div>
 
 
 

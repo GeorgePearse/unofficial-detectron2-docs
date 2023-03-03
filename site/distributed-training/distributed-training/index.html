@@ -613,15 +613,15 @@
 
 <h2 id="distributed-training">Distributed Training</h2>
 <p>Detectron2 only supports DDP (Distributed Data Parralel)</p>
-<pre><code>launch(
+<div class="highlight"><pre><span></span><code>launch(
     run_training,
     num_gpus,
     num_machines=1,
     machine_rank=0,
-    dist_url='auto',
+    dist_url=&#39;auto&#39;,
     args=(cfg,),
 )
-</code></pre>
+</code></pre></div>
 
 
 
