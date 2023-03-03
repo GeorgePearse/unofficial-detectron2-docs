@@ -23,3 +23,6 @@ nav:
 plugins:
   - search:
       lang: en
+      
+      
+repo_url: https://github.com/GeorgePearse/unofficial-detectron2-docs
